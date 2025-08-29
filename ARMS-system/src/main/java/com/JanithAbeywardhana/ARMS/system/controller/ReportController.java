@@ -72,5 +72,11 @@ public class ReportController {
 	}
 	
 	
+	@GetMapping("/getLatest/{limit}")
+	public List<Report> getLatestReports(@PathVariable int limit) {
+	    return reportService.getLatestReports(limit);
+	}
+	
+	
 
 }

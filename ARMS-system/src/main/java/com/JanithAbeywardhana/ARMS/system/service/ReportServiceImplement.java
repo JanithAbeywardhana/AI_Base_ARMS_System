@@ -3,9 +3,11 @@ package com.JanithAbeywardhana.ARMS.system.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.JanithAbeywardhana.ARMS.system.model.Report;
+
 import com.JanithAbeywardhana.ARMS.system.repository.ReportRepo;
 
 @Service
@@ -37,6 +39,11 @@ public class ReportServiceImplement implements ReportService {
 	public String deleteReport(int id) {
 		reportRepo.deleteById(id);
 		return "Report Deleted successfully";
+	}
+
+	@Override
+	public List<Report> getLatestReports(int limit) {
+		return reportRepo.findAllByOrderByReportDateDesc(PageRequest.of(0, limit));
 	}
 
 	@Override

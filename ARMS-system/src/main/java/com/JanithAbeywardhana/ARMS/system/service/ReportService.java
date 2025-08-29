@@ -17,5 +17,7 @@ public interface ReportService {
 	public Report getReportById(int id);
 	
 	List<Report> getReportsByStudentId(int studentId);
+	
+	public List<Report> getLatestReports(int limit);
 
 }
