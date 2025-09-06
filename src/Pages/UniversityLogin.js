@@ -29,15 +29,15 @@ export default function UniversityLogin() {
         const universityData = await response.json();
         console.log("University Login Successful!", universityData);
 
-        // Save university data in localStorage - fix the storage issue
+       
         localStorage.setItem("university", JSON.stringify(universityData));
         localStorage.setItem("isUniversityLoggedIn", "true");
 
-        // Show success message
+       
         setIsSuccess(true);
         alert("Login successful! Redirecting to dashboard...");
 
-        // Redirect after login
+     
         setTimeout(() => {
           window.location.href = "/UniversityDashboard";
         }, 1000);

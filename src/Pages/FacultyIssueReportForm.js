@@ -167,9 +167,8 @@ useEffect(() => {
   setLoading(true);
 
   try {
-    // Get student data from localStorage for submission
     const storedStudent = localStorage.getItem('student');
-    let actualStudentId = 0; // Default for anonymous
+    let actualStudentId = 0; 
     
     if (storedStudent && !isAnonymous) {
       try {
@@ -181,9 +180,8 @@ useEffect(() => {
       }
     }
     
-    // Prepare submission data
     const submitData = {
-      studentId: actualStudentId, // This is the key fix!
+      studentId: actualStudentId, 
       universityName: formData.universityName,
       department: formData.department,
       subject: formData.subject,
@@ -208,10 +206,9 @@ useEffect(() => {
       console.log('Faculty issue submitted successfully');
       setSubmitSuccess(true);
       
-      // Reset form after success
       setTimeout(() => {
         setFormData({
-          studentId: formData.studentId, // Keep pre-filled data
+          studentId: formData.studentId, 
           universityName: formData.universityName,
           department: formData.department,
           subject: '',

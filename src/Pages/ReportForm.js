@@ -22,22 +22,22 @@ const ReportForm = () => {
 
 
   useEffect(() => {
-  // Check if student is logged in and get their data
+
   const storedStudent = localStorage.getItem("student");
   if (storedStudent) {
     try {
       const studentData = JSON.parse(storedStudent);
       console.log('Logged in student data:', studentData);
       
-      // Pre-fill form with student data and set as non-anonymous
+      
       setFormData(prev => ({
         ...prev,
         studentId: studentData.studentId || studentData.id || '',
         university: studentData.university || studentData.universityName || '',
-        isAnonymous: false // Logged-in users should default to non-anonymous
+        isAnonymous: false 
       }));
       
-      // Don't show student ID field since it's automatically filled
+      
       setShowStudentId(false);
     } catch (error) {
       console.error('Error parsing student data:', error);
@@ -45,9 +45,9 @@ const ReportForm = () => {
   }
 }, []);
 
-// Add this useEffect right after your existing useState declarations:
+
 useEffect(() => {
-  // Check if coming from student dashboard
+
   const tempStudentData = localStorage.getItem("tempStudentData");
   const storedStudent = localStorage.getItem("student");
   
@@ -55,7 +55,7 @@ useEffect(() => {
   
   if (tempStudentData) {
     studentData = JSON.parse(tempStudentData);
-    localStorage.removeItem("tempStudentData"); // Clean up
+    localStorage.removeItem("tempStudentData"); 
   } else if (storedStudent) {
     studentData = JSON.parse(storedStudent);
   }
@@ -66,7 +66,7 @@ useEffect(() => {
       ...prev,
       studentId: studentData.studentId || studentData.id || '',
       university: studentData.university || studentData.universityName || '',
-      isAnonymous: false // Logged-in users default to non-anonymous
+      isAnonymous: false 
     }));
   }
 }, []);
@@ -79,8 +79,7 @@ useEffect(() => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -114,7 +113,7 @@ useEffect(() => {
       newErrors.dateofIncident = 'Date of incident is required';
     }
     
-    // Validate student ID only if not anonymous
+    
     if (!formData.isAnonymous && (!formData.studentId || String(formData.studentId).trim() === '')) {
       newErrors.studentId = 'Student ID is required for non-anonymous reports';
     }
@@ -133,9 +132,9 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true);
   
   try {
-    // Get student data from localStorage
+ 
     const storedStudent = localStorage.getItem("student");
-    let actualStudentId = 0; // Default for anonymous
+    let actualStudentId = 0; 
     
     if (storedStudent && !formData.isAnonymous) {
       try {
@@ -147,12 +146,11 @@ const handleSubmit = async (e) => {
       }
     }
     
-    // If not anonymous but no studentId from localStorage, use form input
+
     if (!formData.isAnonymous && actualStudentId === 0) {
       actualStudentId = parseInt(formData.studentId) || 0;
     }
     
-    // Prepare data for submission
     const reportData = {
       title: formData.title,
       description: formData.description,
@@ -160,15 +158,15 @@ const handleSubmit = async (e) => {
       dateofIncident: formData.dateofIncident,
       university: formData.university,
       isAnonymous: formData.isAnonymous,
-      studentId: actualStudentId, // This is the key fix!
+      studentId: actualStudentId, 
       status: "pending",
-      priority: "medium", // You might want to add priority to your form
+      priority: "medium", 
       reportDate: new Date().toISOString()
     };
     
     console.log('Submitting report data:', reportData);
     
-    // Make API call to your Spring Boot backend
+  
     const response = await fetch('http://localhost:8080/report/add', {
       method: 'POST',
       headers: {
@@ -181,7 +179,7 @@ const handleSubmit = async (e) => {
       console.log('Report submitted successfully');
       setShowSuccess(true);
       
-      // Reset form
+ 
       setFormData({
         title: '',
         description: '',

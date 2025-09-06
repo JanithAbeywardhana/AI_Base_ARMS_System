@@ -223,7 +223,7 @@ const [emailForm, setEmailForm] = useState({
   };
 
 
-  // 2. UPDATE THE FETCH UNIVERSITIES USEEFFECT
+ 
 useEffect(() => {
   const fetchUniversities = async () => {
     try {
@@ -238,7 +238,7 @@ useEffect(() => {
     } catch (error) {
       console.error('Error fetching universities:', error);
       setUniversitiesError(error.message);
-      // Fallback data that matches your backend structure
+      
       setUniversities([]);
     } finally {
       setLoadingUniversities(false);
@@ -253,7 +253,6 @@ useEffect(() => {
 const handleAddUniversity = async () => {
   try {
     setIsSubmitting(true);
-    // Basic validation
     if (!newUniversity.name || !newUniversity.email || !newUniversity.password) {
       alert('Please fill in all required fields (Name, Email, Password)');
       return;
@@ -270,12 +269,9 @@ const handleAddUniversity = async () => {
     if (!response.ok) {
       throw new Error('Failed to add university');
     }
-
     const addedUniversity = await response.json();
     setUniversities(prevUniversities => [...prevUniversities, addedUniversity]);
     setShowAddUniversityModal(false);
-    
-    // Reset form
     setNewUniversity({
       name: '',
       email: '',
@@ -464,14 +460,14 @@ const handleAddStudent = async () => {
 const handleExport = async () => {
   try {
     const response = await axios.get("http://localhost:8080/student/export", {
-      responseType: "blob", // important for file download
+      responseType: "blob", 
     });
 
-    // Create a link element for download
+ 
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "students.csv"); // file name
+    link.setAttribute("download", "students.csv"); 
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -631,7 +627,7 @@ const handleSendEmail = async () => {
         priority: 'medium',
         templateId: null
       });
-      fetchCommunications(); // Refresh the recent communications
+      fetchCommunications(); 
     } else {
       throw new Error('Failed to send email');
     }
