@@ -1,6 +1,7 @@
 package com.JanithAbeywardhana.ARMS.system.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,16 +16,93 @@ public class Report {
 	private int reportId;
 	private String title;
 	private String description;
+	private Long universityId;
+	private String university;
 	private String location;
 	private String dateofIncident;
 	private Timestamp reportDate;
 	private String status;
+	private String priority;
 	private Boolean isAnonymous;
 	private int studentId;
+	private String universityResponse;
+	private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 	
 
 	public Report() {
 		
+	}
+	
+	
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+
+
+	public String getUniversityResponse() {
+		return universityResponse;
+	}
+
+
+
+	public void setUniversityResponse(String universityResponse) {
+		this.universityResponse = universityResponse;
+	}
+
+
+
+	public String getPriority() {
+		return priority;
+	}
+
+
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+
+
+	public Long getUniversityid() {
+		return universityId;
+	}
+
+
+
+	public void setUniversityid(Long universityid) {
+		this.universityId = universityid;
+	}
+
+
+
+	public String getUniversity() {
+		return university;
+	}
+
+
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 
 

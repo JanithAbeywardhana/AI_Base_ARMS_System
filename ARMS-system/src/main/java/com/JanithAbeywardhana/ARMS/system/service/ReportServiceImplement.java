@@ -50,6 +50,40 @@ public class ReportServiceImplement implements ReportService {
 	public Report getReportById(int id) {
 		return reportRepo.findById(id).orElse(null);
 	}
+
+	@Override
+	public List<Report> getReportsByUniversityId(Long universityId) {
+		return reportRepo.findByUniversityId(universityId);
+	}
+
+	@Override
+	public List<Report> getReportsByUniversityName(String university) {
+		return reportRepo.findByUniversity(university);
+	}
+
+	@Override
+	public long countByUniversityId(Long universityId) {
+		return reportRepo.countByUniversityId(universityId);
+	}
+
+	@Override
+	public long countByUniversityIdAndStatus(Long universityId, String status) {
+		return reportRepo.countByUniversityIdAndStatus(universityId, status);
+	}
+
+	@Override
+	public long countByUniversityName(String universityName) {
+		return reportRepo.countByUniversity(universityName);
+	}
+
+	@Override
+	public long countByUniversityNameAndStatus(String universityName, String status) {
+		return reportRepo.countByUniversityAndStatus(universityName, status);
+	}
+	
+	
+
+
 	
 	
 	 

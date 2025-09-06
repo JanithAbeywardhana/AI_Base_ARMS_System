@@ -6,6 +6,10 @@ import com.JanithAbeywardhana.ARMS.system.model.Student;
 import com.JanithAbeywardhana.ARMS.system.service.StudentService;
 import com.JanithAbeywardhana.ARMS.system.util.JwtUtil;
 
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +136,32 @@ public class StudentController {
             return ResponseEntity.badRequest().body(error);
         }
         
+    }
+    
+    @GetMapping("/export")
+    public void exportStudents(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=students.csv");
+
+        List<Student> students = studentService.getAllStudents();
+
+        // Write CSV Header
+        PrintWriter writer = response.getWriter();
+        writer.println("ID,Name,Email,University,UniversityStudentID");
+
+        // Write Data
+        for (Student student : students) {
+            writer.println(
+                student.getStudentId()+ "," +
+                student.getStudentName() + "," +
+                student.getStudentEmail() + "," +
+                student.getUniversityName()+ "," +
+                student.getUniversityStId()  
+            );
+        }
+
+        writer.flush();
+        writer.close();
     }
     
 }

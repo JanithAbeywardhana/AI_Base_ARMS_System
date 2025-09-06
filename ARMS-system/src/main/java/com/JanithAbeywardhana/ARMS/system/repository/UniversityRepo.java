@@ -15,4 +15,6 @@ public interface UniversityRepo extends JpaRepository<University,Long>
 	List<University> findByActive(boolean active);
     List<University> findByNameContainingIgnoreCase(String name);
 	Optional<University> findByEmail(String email);
+	
+	University findByEmailAndPassword(String email, String password);
 }

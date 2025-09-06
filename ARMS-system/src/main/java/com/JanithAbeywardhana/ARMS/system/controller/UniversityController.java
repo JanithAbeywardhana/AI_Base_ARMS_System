@@ -22,22 +22,23 @@ import com.JanithAbeywardhana.ARMS.system.service.UniversityService;
 
 @RestController
 @RequestMapping("/universities")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class UniversityController {
 
 	@Autowired
     private UniversityService universityService;
 	
 	@PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest ) {
-        String email = loginRequest.get("email");
-        String password = loginRequest.get("password");
-        
-        University university = universityService.loginUniversity(email, password);
-        if(university != null) {
-        	return ResponseEntity.ok("Login Successfull");
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credentials");
+	public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+	    String email = loginData.get("email");
+	    String password = loginData.get("password");
+	    University uni = universityService.loginUniversity(email, password);
+
+	    if (uni != null) {
+	        return ResponseEntity.ok(uni);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+	    }
 	}
 	
 	
@@ -71,18 +72,18 @@ public class UniversityController {
     }
     
     @PutMapping("/update/{id}")
-    public String updateUniversity(@PathVariable Long id, @RequestBody University university)
-    {
-    	University existingUniversity = universityService.getUniversityById(id);
-    	if(existingUniversity != null) {
-    		university.setId(id);
-    		universityService.updateUniversity(university);
-    		return "University Update Successfully";
-    	}else {
-    		return "University not found with ID" + id;
-    	}
-    	
+    public ResponseEntity<University> updateUniversity(@PathVariable Long id, @RequestBody University university) {
+        University existingUniversity = universityService.getUniversityById(id);
+
+        if (existingUniversity != null) {
+            university.setId(id);
+            University updated = universityService.updateUniversity(university);
+            return ResponseEntity.ok(updated); // return JSON
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUniversity(@PathVariable Long id) {

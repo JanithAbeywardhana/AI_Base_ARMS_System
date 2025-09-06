@@ -44,6 +44,49 @@ public class FIssueServiceImplement implements FIssueService {
 	public FIssue getFIssueById(int id) {
 		return fissueRepo.findById(id).orElse(null);
 	}
+
+	@Override
+	public List<FIssue> getFacultyIssuesByUniversityId(Long universityId) {
+		return fissueRepo.findByUniversityId(universityId);
+	}
+
+	@Override
+	public FIssue getFacultyIssueById(int issueId) {
+		return fissueRepo.findById(issueId).orElse(null);
+	}
+
+	@Override
+	public void updateFacultyIssue(FIssue issue) {
+		fissueRepo.save(issue);
+		
+	}
+
+	@Override
+	public long countByUniversityId(Long universityId) {
+		return fissueRepo.countByUniversityId(universityId);
+	}
+
+	@Override
+	public long countByUniversityIdAndStatus(Long universityId, String status) {
+		return fissueRepo.countByUniversityIdAndStatus(universityId, status);
+	}
+
+	@Override
+	public List<FIssue> getFacultyIssuesByUniversityName(String universityName) {
+		return fissueRepo.findByUniversityName(universityName);
+	}
+
+	@Override
+	public long countByUniversityName(String universityName) {
+		return fissueRepo.countByUniversityName(universityName);
+	}
+
+	@Override
+	public long countByUniversityNameAndStatus(String universityName, String status) {
+		return fissueRepo.countByUniversityNameAndStatus(universityName, status);
+	}
+	
+	
 	
 	
 	

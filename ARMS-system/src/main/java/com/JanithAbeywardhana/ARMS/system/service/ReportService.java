@@ -19,5 +19,20 @@ public interface ReportService {
 	List<Report> getReportsByStudentId(int studentId);
 	
 	public List<Report> getLatestReports(int limit);
+	
+	public List<Report> getReportsByUniversityId(Long universityId);
+	
+	public List<Report> getReportsByUniversityName(String university);
+	
+	public long countByUniversityId(Long universityId);
+	
+	public long countByUniversityIdAndStatus(Long universityId, String status);
+	
+   
+    long countByUniversityName(String universityName);
+    long countByUniversityNameAndStatus(String universityName, String status);
+	
+	
+	
 
 }

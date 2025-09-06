@@ -15,10 +15,44 @@ public class FIssue {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int issueId;
 	private int studentId;
+	private Long universityId;
 	private String universityName;
 	private String department;
 	private String subject;
 	private String description;
+	private String universityResponse;
+	private Timestamp respondedAt;
+	
+	
+	public String getUniversityResponse() {
+		return universityResponse;
+	}
+
+
+	public void setUniversityResponse(String universityResponse) {
+		this.universityResponse = universityResponse;
+	}
+
+
+	public Timestamp getRespondedAt() {
+		return respondedAt;
+	}
+
+
+	public void setRespondedAt(Timestamp respondedAt) {
+		this.respondedAt = respondedAt;
+	}
+
+
+	public Long getUniversityid() {
+		return universityId;
+	}
+
+
+	public void setUniversityid(Long universityid) {
+		this.universityId = universityid;
+	}
+
 	private String issueType;
     private String priority;
     private String status;
