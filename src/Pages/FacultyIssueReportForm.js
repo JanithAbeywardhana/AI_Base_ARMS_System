@@ -33,7 +33,6 @@ const FacultyIssueReportForm = ({ onBack }) => {
   const [studentData, setStudentData] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(false);
 
-  // Issue types based on common faculty issues
   const issueTypes = [
     { value: 'academic_misconduct', label: 'Academic Misconduct' },
     { value: 'unfair_grading', label: 'Unfair Grading' },
@@ -53,7 +52,6 @@ const FacultyIssueReportForm = ({ onBack }) => {
     { value: 'critical', label: 'Critical - Urgent attention needed', color: 'text-red-600' }
   ];
 
-  // Common Sri Lankan universities and departments
   const universities = [
     'University of Colombo',
     'University of Peradeniya',
